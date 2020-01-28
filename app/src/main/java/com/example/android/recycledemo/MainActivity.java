@@ -11,8 +11,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> nameData;
-    private ArrayList<String> commentData;
+    private ArrayList<Message> messages;
     private RecyclerView mainRecycling;
     private MainAdapter mainAdapter;
 
@@ -20,22 +19,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        nameData= new ArrayList<String>();
-        commentData = new ArrayList<String>();
+        messages= new ArrayList<Message>();
 
-        HashMap displayData = new HashMap<String, String>();
-        displayData.put("Nathan", "I sure like eating steak for dinner!");
-        displayData.put("Suzie", "OMG So cool!! I'm at the beach!!!");
-        displayData.put("Dilyn", "HAHA, watch out for that shark, Suzie!");
-        displayData.put("Anna", "Come on Dilyn, that really wasn't funny. Grow up!");
 
-        for (Object a: displayData.keySet()){
-            nameData.add((String)a);
-            commentData.add((String)displayData.get(a));
-        }
+        messages.add(new Message("Nathan", "I sure like eating steak for dinner!"));
+        messages.add(new Message("Suzie", "OMG So cool!! I'm at the beach!!!"));
+        messages.add(new Message("Dilyn", "HAHA, watch out for that shark, Suzie!"));
+        messages.add(new Message("Anna", "Come on Dilyn, that really wasn't funny. Grow up!"));
 
         mainRecycling = findViewById(R.id.recycler_main);
-        mainAdapter = new MainAdapter(nameData, commentData,this);
+        mainAdapter = new MainAdapter(messages,this);
         mainRecycling.setAdapter(mainAdapter);
         mainRecycling.setLayoutManager(new LinearLayoutManager(this));
     }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,13 +14,11 @@ import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
 
-    private List<String> nameInfo;
-    private List<String> commentInfo;
+    private List<Message> messageInfo;
     private LayoutInflater inflator;
 
-    public MainAdapter(List<String> namelist, List<String> commentList, Context context){
-        nameInfo = namelist;
-        commentInfo = commentList;
+    public MainAdapter(List<Message> messages, Context context){
+        messageInfo = messages;
         inflator = LayoutInflater.from(context);
     }
 
@@ -34,16 +31,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MainHolder holder, int position) {
-        String name=nameInfo.get(position);
-        String comment = commentInfo.get(position);
+        Message message=messageInfo.get(position);
 
-        holder.NameView.setText(name);
-        holder.CommentView.setText(comment);
+        holder.NameView.setText(message.name);
+        holder.CommentView.setText(message.comment);
     }
 
     @Override
     public int getItemCount() {
-        return nameInfo.size();
+        return messageInfo.size();
     }
 
     class MainHolder extends RecyclerView.ViewHolder{
