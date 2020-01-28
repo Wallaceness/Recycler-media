@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,6 +38,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
 
         holder.NameView.setText(message.name);
         holder.CommentView.setText(message.comment);
+
+        if (message.drawable){
+            holder.image.setImageResource(R.drawable.steak);
+        }
+        else{
+            Picasso.get().load(message.src).into(holder.image);
+        }
     }
 
     @Override
@@ -47,6 +57,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
         ConstraintLayout MainView;
         TextView NameView;
         TextView CommentView;
+        ImageView image;
         final MainAdapter mAdapter;
 
         public MainHolder(View itemView, MainAdapter adapter){
@@ -54,6 +65,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {
             MainView= itemView.findViewById(R.id.list_main);
             NameView = itemView.findViewById(R.id.list_name);
             CommentView = itemView.findViewById(R.id.list_comment);
+            image = itemView.findViewById(R.id.list_picture);
 
             this.mAdapter=adapter;
         }
